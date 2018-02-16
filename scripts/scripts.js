@@ -1,39 +1,40 @@
-(function(){
+(function (){
   const ENGINE = {
-    CALLBACK: null,
+    CALLBACK: function (){return true;},
     TARGET: null,
     encode(component) {
       return decodeURIComponent(component);
     },
-    fetch: function (target) {
-
+    fetch: function (data) {
+      if (window[data]) {
+        this.TARGET.DATA = window[data];
+      }
+    },
+    loaded: function (callback) {
+      if (callback) { this.CALLBACK = callback; }
+      this.search();
     },
     search: function () {
-        if (window.location.search) {
-            const search = window.location.search.substring(1).replace("\&amp;\gi", "&");
-            const queries = search.split("&");
-            const pairs = {};
+      if (window.location.search) {
+        const search = window.location.search.substring(1).replace("\&amp;\gi", "&");
+        const queries = search.split("&");
+        const pairs = {};
 
-            for (const query in queries) {
-                const keyvalue = queries[query].split("=");
-                pairs[keyvalue[0]] = keyvalue[1];
-            }
-
-            this.CALLBACK(pairs);
-        } else {
-            this.CALLBACK();
+        for (const query in queries) {
+          const keyvalue = queries[query].split("=");
+          this.TARGET[keyvalue[0]] && this.TARGET[keyvalue[0]](keyvalue[1]);
         }
+      } else {
+        this.CALLBACK();
+      }
     },
-    loaded: function (target, callback) {
-      this.CALLBACK = callback;
+    target: function (target) {
       this.TARGET = target;
-
-      this.fetch();
-      this.search();
     },
   };
 
   const SPKSPLL = {
+    DATA: null,
     DISPLAY: null,
     USERCOUNT: 0,
     USERLIST: null,
@@ -41,7 +42,7 @@
 
     },
     display: function (update) {
-
+      console.log(this.DATA)
     },
     expurgate: function (data, display) {
 
@@ -50,11 +51,13 @@
 
     },
     loaded: function () {
-        console.log("loaded");
+      console.log("loaded");
     },
     init: function () {
-        ENGINE.loaded(this, this.loaded);
-        this.build();
+      ENGINE.target(this);
+      ENGINE.fetch("ROM");
+      ENGINE.loaded(this.loaded);
+      this.build();
     }
   };
 
