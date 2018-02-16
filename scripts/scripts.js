@@ -33,26 +33,12 @@
     },
   };
 
-  const CLVR = {
+  const SPKSPLL = {
     DISPLAY: null,
     USERCOUNT: 0,
     USERLIST: null,
     build: function (title, data) {
-        let $shadow = $("<ol/>");
-        const items = new Array(36);
 
-        console.log(items.length)
-
-        items.forEach(function(item) {
-            console.log(item)
-            // $shadow.append($("<li/>"))
-        });
-
-
-
-        console.log($shadow)
-
-        $("board ol").html($shadow.html());
     },
     display: function (update) {
 
@@ -72,6 +58,6 @@
     }
   };
 
-  window.CLVR = CLVR;
-  CLVR.init();
+  window.SPKSPLL = SPKSPLL;
+  SPKSPLL.init();
 }());
