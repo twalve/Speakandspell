@@ -1,0 +1,21 @@
+html {
+  font-size: 62.5%;
+}
+
+body {
+  background: whitesmoke;
+  color: black;
+  font-size: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+body * {
+  box-sizing: border-box;
+}
+
+ol, ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
