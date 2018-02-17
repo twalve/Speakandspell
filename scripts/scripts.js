@@ -36,6 +36,7 @@
   const SPKSPLL = {
     DATA: null,
     DISPLAY: null,
+    DIVISION: null,
     USERCOUNT: 0,
     USERLIST: null,
     build: function (title, data) {
@@ -47,13 +48,21 @@
     expurgate: function (data, display) {
 
     },
+    get: {
+      week: function () {
+        let week = DATE.local().weekNumber;
+
+        return WEEKS[SPKSPLL.DIVISION][week];
+      }
+    },
     language: function (pairs) {
 
     },
     loaded: function () {
-      console.log("loaded");
+      SPKSPLL.DATA = ROM.weeks[SPKSPLL.get.week()];
     },
     init: function () {
+      this.DIVISION = "WAS";
       ENGINE.target(this);
       ENGINE.fetch("ROM");
       ENGINE.loaded(this.loaded);
