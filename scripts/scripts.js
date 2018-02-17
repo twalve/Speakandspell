@@ -60,6 +60,7 @@
     },
     loaded: function () {
       SPKSPLL.DATA = ROM.weeks[SPKSPLL.get.week()];
+      console.log(ROM.weeks)
     },
     init: function () {
       this.DIVISION = "WAS";
