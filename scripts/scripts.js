@@ -37,10 +37,22 @@
     DATA: null,
     DISPLAY: null,
     DIVISION: null,
+    SPOKEN: 0,
     USERCOUNT: 0,
     USERLIST: null,
     build: function (title, data) {
+      const list = document.createElement("ol");
 
+      for (const word in SPKSPLL.DATA) {
+        const item = document.createElement("li");
+        const span = document.createElement("span");
+        span.innerHTML = SPKSPLL.DATA[word];
+
+        item.appendChild(span)
+        list.appendChild(item)
+      }
+
+      document.querySelector("board").appendChild(list);
     },
     display: function (update) {
       console.log(this.DATA)
@@ -56,7 +68,13 @@
       }
     },
     language: function (pairs) {
+      // speak('hello Jem my ma!')//, { voice: "en-rp"})
 
+      if (SPKSPLL.SPOKEN < SPKSPLL.DATA.length) {
+        speak(SPKSPLL.DATA[SPKSPLL.SPOKEN])
+        SPKSPLL.SPOKEN += 1;
+        setTimeout(SPKSPLL.language, 2000)
+      }
     },
     loaded: function () {
       SPKSPLL.DATA = ROM.weeks[SPKSPLL.get.week()];
@@ -68,6 +86,8 @@
       ENGINE.fetch("ROM");
       ENGINE.loaded(this.loaded);
       this.build();
+
+      this.language();
     }
   };
 
