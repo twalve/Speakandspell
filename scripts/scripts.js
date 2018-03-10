@@ -33,6 +33,25 @@
     },
   };
 
+  const SPEAK = {
+    PITCH: 1,
+    RATE: 1,
+    SYNTH: window.speechSynthesis,
+    VOICES: [],
+    speak: function(utterance) {
+      var speak = new SpeechSynthesisUtterance(utterance);
+      speak.voice = this.VOICES["Daniel (en-GB)"];
+      speak.pitch = this.PITCH;
+      speak.rate = this.RATE;
+
+      this.SYNTH.speak(speak);
+    },
+    init: function () {
+      this.VOICES = this.SYNTH.getVoices();
+    }
+  };
+  SPEAK.init();
+
   const SPKSPLL = {
     DATA: null,
     DISPLAY: null,
@@ -71,7 +90,7 @@
       // speak('hello Jem my ma!')//, { voice: "en-rp"})
 
       if (SPKSPLL.SPOKEN < SPKSPLL.DATA.length) {
-        speak(SPKSPLL.DATA[SPKSPLL.SPOKEN])
+        SPEAK.speak(SPKSPLL.DATA[SPKSPLL.SPOKEN]);
         SPKSPLL.SPOKEN += 1;
         setTimeout(SPKSPLL.language, 2000)
       }
