@@ -33,7 +33,7 @@
     },
   };
 
-  const SPEAK = {
+  const TALK = {
     PITCH: 1,
     RATE: 1,
     SYNTH: window.speechSynthesis,
@@ -50,21 +50,21 @@
       this.VOICES = this.SYNTH.getVoices();
     }
   };
-  SPEAK.init();
+  TALK.init();
 
-  const SPKSPLL = {
+  const TLKTYP = {
     DATA: null,
     DISPLAY: null,
     DIVISION: null,
-    SPEAK: false,
+    TALK: false,
     SPOKEN: 0,
     build: function (title, data) {
       const list = document.createElement("ol");
 
-      for (const word in SPKSPLL.DATA) {
+      for (const word in TLKTYP.DATA) {
         const item = document.createElement("li");
         const span = document.createElement("span");
-        span.innerHTML = SPKSPLL.DATA[word];
+        span.innerHTML = TLKTYP.DATA[word];
 
         item.appendChild(span)
         list.appendChild(item)
@@ -88,7 +88,7 @@
       week: function () {
         let week = DATE.local().weekNumber;
 
-        return WEEKS[SPKSPLL.DIVISION][week];
+        return WEEKS[TLKTYP.DIVISION][week];
       }
     },
     keydown: function (event) {
@@ -102,30 +102,30 @@
 
       },
       start: function () {
-        this.SPEAK = true;
+        this.TALK = true;
       },
       stop: function () {
-        this.SPEAK = false;
+        this.TALK = false;
       }
     },
     language: function (pairs) {
-      if (!SPKSPLL.SPEAK) {
+      if (!TLKTYP.TALK) {
         return false;
       }
 
-      if (SPKSPLL.SPOKEN < SPKSPLL.DATA.length) {
-        SPEAK.speak(SPKSPLL.DATA[SPKSPLL.SPOKEN]);
-        SPKSPLL.SPOKEN += 1;
-        setTimeout(SPKSPLL.language, 2000)
+      if (TLKTYP.SPOKEN < TLKTYP.DATA.length) {
+        TALK.speak(TLKTYP.DATA[TLKTYP.SPOKEN]);
+        TLKTYP.SPOKEN += 1;
+        setTimeout(TLKTYP.language, 2000)
       }
     },
     loaded: function () {
-      SPKSPLL.DATA = ROM.weeks[SPKSPLL.get.week()];
+      TLKTYP.DATA = ROM.weeks[TLKTYP.get.week()];
       // console.log(ROM.weeks)
     },
     listen: function () {
-      document.body.addEventListener("click", SPKSPLL.click);
-      document.body.addEventListener("keydown", SPKSPLL.keydown);
+      document.body.addEventListener("click", TLKTYP.click);
+      document.body.addEventListener("keydown", TLKTYP.keydown);
     },
     init: function () {
       this.DIVISION = "WAS";
@@ -139,6 +139,6 @@
     }
   };
 
-  window.SPKSPLL = SPKSPLL;
-  SPKSPLL.init();
+  window.TLKTYP = TLKTYP;
+  TLKTYP.init();
 }());
