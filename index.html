@@ -13,7 +13,18 @@
     <header>
       <h1>Speak and Spell</h1>
     </header>
+
     <main>
+      <menu id="controls">
+        <nav>
+          <ul>
+            <li><button id="controls-back"><span>back</span></button></li>
+            <li><button id="controls-playpause" class="playpause play"><span><strong>play</strong><b>pause</b></span></button></li>
+            <li><button id="controls-next" data-chicken="rocks"><span>next</span></button></li>
+          </ul>
+        </nav>
+      </menu>
+
       <section id="console">
         <header>
           <h1>Speak and Spell</h1>
@@ -30,12 +41,14 @@
 
     <footer>
     </footer>
+
     <script src="data/rom.js"></script>
     <script src="data/weeks.js"></script>
 
     <script src="vendor/luxon/0.5.0.min.js"></script>
     <script src="vendor/micro/micro.min.js"></script>
 
+    <script src="scripts/library.js"></script>
     <script src="scripts/scripts.js"></script>
   </body>
 </html>

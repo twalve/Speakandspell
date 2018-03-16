@@ -38,3 +38,18 @@ textarea {
   outline: none;
   width: 99.75vw;
 }
+
+/* controls */
+
+#controls .playpause strong,
+#controls .playpause b {
+  display: none;
+}
+
+#controls .play strong {
+  display: block;
+}
+
+#controls .pause b {
+  display: block;
+}

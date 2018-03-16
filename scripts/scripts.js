@@ -56,9 +56,8 @@
     DATA: null,
     DISPLAY: null,
     DIVISION: null,
+    SPEAK: false,
     SPOKEN: 0,
-    USERCOUNT: 0,
-    USERLIST: null,
     build: function (title, data) {
       const list = document.createElement("ol");
 
@@ -73,6 +72,12 @@
 
       document.querySelector("board").appendChild(list);
     },
+    click: function (event) {
+      var target = event.target;
+      var nearest = $$.find.nearest(target, "[data]");
+
+      console.log(target);
+    },
     display: function (update) {
       console.log(this.DATA)
     },
@@ -86,8 +91,27 @@
         return WEEKS[SPKSPLL.DIVISION][week];
       }
     },
+    keydown: function (event) {
+      // console.log(event.keyCode);
+    },
+    keys: {
+      next: function () {
+
+      },
+      repeat: function () {
+
+      },
+      start: function () {
+        this.SPEAK = true;
+      },
+      stop: function () {
+        this.SPEAK = false;
+      }
+    },
     language: function (pairs) {
-      // speak('hello Jem my ma!')//, { voice: "en-rp"})
+      if (!SPKSPLL.SPEAK) {
+        return false;
+      }
 
       if (SPKSPLL.SPOKEN < SPKSPLL.DATA.length) {
         SPEAK.speak(SPKSPLL.DATA[SPKSPLL.SPOKEN]);
@@ -97,16 +121,21 @@
     },
     loaded: function () {
       SPKSPLL.DATA = ROM.weeks[SPKSPLL.get.week()];
-      console.log(ROM.weeks)
+      // console.log(ROM.weeks)
+    },
+    listen: function () {
+      document.body.addEventListener("click", SPKSPLL.click);
+      document.body.addEventListener("keydown", SPKSPLL.keydown);
     },
     init: function () {
       this.DIVISION = "WAS";
+
       ENGINE.target(this);
       ENGINE.fetch("ROM");
       ENGINE.loaded(this.loaded);
-      this.build();
 
-      this.language();
+      this.build();
+      this.listen();
     }
   };
 
