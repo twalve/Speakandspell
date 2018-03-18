@@ -72,11 +72,76 @@
 
       document.querySelector("board").appendChild(list);
     },
-    click: function (event) {
-      var target = event.target;
-      var nearest = $$.find.nearest(target, "[data]");
+    buttons: {
+      next: function () {
 
-      console.log(target);
+      },
+      repeat: function () {
+
+      },
+      start: function () {
+        this.TALK = true;
+        this.language();
+      },
+      stop: function () {
+        this.TALK = false;
+      }
+    },
+    click: function (event) {
+      const target = event.target;
+      const nearest = $$.find.nearest(target, "#id");
+
+      const keyvalue = nearest.id.split("-");
+      const key = keyvalue[0];
+      const value = keyvalue[1];
+
+      switch (key) {
+        case "controls":
+          TLKTYP.controls[value](keyvalue);
+          break;
+        case "buttons":
+        case "keys":
+          console.log("Mangoes and papayas are $2.79 a pound.");
+          break;
+        default:
+          console.log("Sorry, nothing has caught the key: ' + key + '! :(");
+      }
+    },
+    control: function (command) {
+
+    },
+    controls: {
+      back: function () {
+
+      },
+      next: function () {
+
+      },
+      playpause: function () {
+        if (!TLKTYP.TALK) {
+          this.start();
+        } else {
+          this.stop();
+        }
+      },
+      repeat: function () {
+
+      },
+      start: function () {
+        TLKTYP.TALK = true;
+        TLKTYP.language();
+
+        const $playpause = $("#controls-playpause");
+        $playpause.classList.remove("play");
+        $playpause.classList.add("pause");
+      },
+      stop: function () {
+        TLKTYP.TALK = false;
+
+        const $playpause = $("#controls-playpause");
+        $playpause.classList.remove("pause");
+        $playpause.classList.add("play");
+      }
     },
     display: function (update) {
       console.log(this.DATA)
@@ -103,6 +168,7 @@
       },
       start: function () {
         this.TALK = true;
+        this.language();
       },
       stop: function () {
         this.TALK = false;
@@ -110,13 +176,15 @@
     },
     language: function (pairs) {
       if (!TLKTYP.TALK) {
-        return false;
+        return TLKTYP.TALK;
       }
 
       if (TLKTYP.SPOKEN < TLKTYP.DATA.length) {
         TALK.speak(TLKTYP.DATA[TLKTYP.SPOKEN]);
         TLKTYP.SPOKEN += 1;
         setTimeout(TLKTYP.language, 2000)
+      } else {
+        TLKTYP.controls.stop();
       }
     },
     loaded: function () {
