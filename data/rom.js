@@ -13,6 +13,18 @@
       ],
       "5": [
         "prize", "twice", "alike", "invite", "alive", "hour", "our", "habit", "thunder", "behind", "beautiful", "story", "happened", "hear", "amuse", "omen", "proper", "wren", "wrong", "knock"
+      ],
+      "7": [
+        "cheek", "street", "asleep", "between", "cheese", "record", "recall", "reset", "repeat", "revist", "quick", "front", "woman", "through", "threw", "new", "knew", "rode", "road", "field"
+      ],
+      "8": [
+        "wild", "tidy", "blind", "spider", "pirate", "batch", "toast", "study", "group", "catch", "matches", "write", "creek", "chickens", "barn", "would", "wood", "table", "label", "child"
+      ],
+      "9": [
+        "proud", "sound", "south", "around", "thousand", "whole", "number", "protect", "effort", "weight", "wait", "uncle", "aunt", "people", "assembly", "husband", "wife", "son", "babies", "house"
+      ],
+      "10": [
+        "clone", "stone", "drone", "alone", "prone", "dingo", "radio", "potato", "tomato", "volcano", "must", "were", "glass", "great", "grate", "final", "during", "everywhere", "lose", "loose"
       ]
     },
     setup: function () {
