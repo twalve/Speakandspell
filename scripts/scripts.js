@@ -125,7 +125,7 @@
         }
       },
       repeat: function () {
-
+        alert("Please repeat")
       },
       start: function () {
         TLKTYP.TALK = true;

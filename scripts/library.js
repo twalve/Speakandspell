@@ -10,25 +10,24 @@ const $$ = {
   find: {
     nearest: function (target, property) {// #id, .className, [data], tagname
       let current = target;
-      let parent = current.parentNode;
       let nearest = null;
 
-      while (parent !== document.body) {
-        if (property.charAt(0) === "#" && parent.id) {
-          nearest = parent;
+      while (current !== document.body) {
+        if (property.charAt(0) === "#" && current.id) {
+          nearest = current;
           break;
-        } else if (property.charAt(0) === "." && !!parent.classList.length) {
-          nearest = parent;
+        } else if (property.charAt(0) === "." && !!current.classList.length) {
+          nearest = current;
           break;
-        } else if (property.charAt(0) === "[" && $$.object.length(parent.dataset)) {
-          nearest = parent;
+        } else if (property.charAt(0) === "[" && $$.object.length(current.dataset)) {
+          nearest = current;
           break;
-        } else if (parent.tagName.toLowerCase() === property) {
-          nearest = parent;
+        } else if (current.tagName.toLowerCase() === property) {
+          nearest = current;
           break;
         }
 
-        parent = parent.parentNode;
+        current = current.parentNode;
       }
 
       return nearest;
