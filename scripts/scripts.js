@@ -91,20 +91,22 @@
       const target = event.target;
       const nearest = $$.find.nearest(target, "#id");
 
-      const keyvalue = nearest.id.split("-");
-      const key = keyvalue[0];
-      const value = keyvalue[1];
+      if (nearest) {
+        const keyvalue = nearest.id.split("-");
+        const key = keyvalue[0];
+        const value = keyvalue[1];
 
-      switch (key) {
-        case "controls":
-          TLKTYP.controls[value](keyvalue);
-          break;
-        case "buttons":
-        case "keys":
-          console.log("Mangoes and papayas are $2.79 a pound.");
-          break;
-        default:
-          console.log("Sorry, nothing has caught the key: ' + key + '! :(");
+        switch (key) {
+          case "controls":
+            TLKTYP.controls[value] && TLKTYP.controls[value](keyvalue);
+            break;
+          case "buttons":
+          case "keys":
+            console.log("Mangoes and papayas are $2.79 a pound.");
+            break;
+          default:
+            console.log("Sorry, nothing has caught the key: " + key + "! :(");
+        }
       }
     },
     control: function (command) {
