@@ -1,20 +1,24 @@
-(function (){
+(function() {
   const ENGINE = {
-    CALLBACK: function (){return true;},
+    CALLBACK: function() {
+      return true;
+    },
     TARGET: null,
     encode(component) {
       return decodeURIComponent(component);
     },
-    fetch: function (data) {
+    fetch: function(data) {
       if (window[data]) {
         this.TARGET.DATA = window[data];
       }
     },
-    loaded: function (callback) {
-      if (callback) { this.CALLBACK = callback; }
+    loaded: function(callback) {
+      if (callback) {
+        this.CALLBACK = callback;
+      }
       this.search();
     },
-    search: function () {
+    search: function() {
       if (window.location.search) {
         const search = window.location.search.substring(1).replace("\&amp;\gi", "&");
         const queries = search.split("&");
@@ -28,7 +32,7 @@
         this.CALLBACK();
       }
     },
-    target: function (target) {
+    target: function(target) {
       this.TARGET = target;
     },
   };
@@ -46,7 +50,7 @@
 
       this.SYNTH.speak(speak);
     },
-    init: function () {
+    init: function() {
       this.VOICES = this.SYNTH.getVoices();
     }
   };
@@ -58,7 +62,7 @@
     DIVISION: null,
     TALK: false,
     SPOKEN: 0,
-    build: function (title, data) {
+    build: function(title, data) {
       const list = document.createElement("ol");
 
       for (const word in TLKTYP.DATA) {
@@ -73,21 +77,21 @@
       document.querySelector("board").appendChild(list);
     },
     buttons: {
-      next: function () {
+      next: function() {
 
       },
-      repeat: function () {
+      repeat: function() {
 
       },
-      start: function () {
+      start: function() {
         this.TALK = true;
         this.language();
       },
-      stop: function () {
+      stop: function() {
         this.TALK = false;
       }
     },
-    click: function (event) {
+    click: function(event) {
       const target = event.target;
       const nearest = $$.find.nearest(target, "#id");
 
@@ -109,27 +113,27 @@
         }
       }
     },
-    control: function (command) {
+    control: function(command) {
 
     },
     controls: {
-      back: function () {
+      back: function() {
 
       },
-      next: function () {
+      next: function() {
 
       },
-      playpause: function () {
+      playpause: function() {
         if (!TLKTYP.TALK) {
           this.start();
         } else {
           this.stop();
         }
       },
-      repeat: function () {
+      repeat: function() {
         alert("Please repeat")
       },
-      start: function () {
+      start: function() {
         TLKTYP.TALK = true;
         TLKTYP.language();
 
@@ -137,7 +141,7 @@
         $playpause.classList.remove("play");
         $playpause.classList.add("pause");
       },
-      stop: function () {
+      stop: function() {
         TLKTYP.TALK = false;
 
         const $playpause = $("#controls-playpause");
@@ -145,38 +149,38 @@
         $playpause.classList.add("play");
       }
     },
-    display: function (update) {
+    display: function(update) {
       console.log(this.DATA)
     },
-    expurgate: function (data, display) {
+    expurgate: function(data, display) {
 
     },
     get: {
-      week: function () {
+      week: function() {
         let week = DATE.local().weekNumber;
 
         return WEEKS[TLKTYP.DIVISION][week];
       }
     },
-    keydown: function (event) {
+    keydown: function(event) {
       // console.log(event.keyCode);
     },
     keys: {
-      next: function () {
+      next: function() {
 
       },
-      repeat: function () {
+      repeat: function() {
 
       },
-      start: function () {
+      start: function() {
         this.TALK = true;
         this.language();
       },
-      stop: function () {
+      stop: function() {
         this.TALK = false;
       }
     },
-    language: function (pairs) {
+    language: function(pairs) {
       if (!TLKTYP.TALK) {
         return TLKTYP.TALK;
       }
@@ -189,15 +193,15 @@
         TLKTYP.controls.stop();
       }
     },
-    loaded: function () {
+    loaded: function() {
       TLKTYP.DATA = ROM.weeks[TLKTYP.get.week()];
       // console.log(ROM.weeks)
     },
-    listen: function () {
+    listen: function() {
       document.body.addEventListener("click", TLKTYP.click);
       document.body.addEventListener("keydown", TLKTYP.keydown);
     },
-    init: function () {
+    init: function() {
       this.DIVISION = "WAS";
 
       ENGINE.target(this);
